@@ -28,6 +28,13 @@ let pipeYPos = 0;
 let pipeTopImg;
 let pipeBottomImg;
 
+//rörens rörelse
+let velocityX = -2; // så att rören rör sig åt vänster. hastigheten.
+
+//fågeln hopp
+let velocityY = 0;
+let gravity = 0.4;
+
 window.onload = function(){
     gameBoard = document.getElementById('game-board');
     gameBoard.height = gameBoardHeight;
@@ -45,39 +52,65 @@ window.onload = function(){
     }
 
     pipeTopImg = new Image();
-    pipeTopImg.src = './media/Pipe.png';
+    pipeTopImg.src = './media/toppipe.png';
     
     pipeBottomImg = new Image();
-    pipeBottomImg.src = './media/Pipe.png';
+    pipeBottomImg.src = './media/bottompipe.png';
     
 
     requestAnimationFrame(updateGame);
     setInterval(placePipes, 1500);
-
+    document.addEventListener('keydown', birdJump);
 }
+
 
 function updateGame (){
     requestAnimationFrame(updateGame);
     ctx.clearRect(0,0, gameBoardWidth, gameBoardHeight);
 
+    velocityY += gravity;
+    birdie.y += velocityY;
     ctx.drawImage(birdieImage, birdie.x, birdie.y, birdie.width, birdie.height);
 
     for (let i = 0; i < pipesArray.length; i++){
-        let pipe = pipeArray[i];
+        let pipe = pipesArray[i];
+        pipe.x += velocityX * 1.5;
         ctx.drawImage(pipe.img, pipe.x, pipe.y, pipe.width, pipe.height);
     }
+
 }
 
 function placePipes (){
+    // längden på översta rören växlar mellan -1/4 av längden och -3/4 av länden
+    let randomPipesY = pipeYPos - pipeHeight/4 - Math.random()*(pipeHeight/2);
+    let opening = gameBoardHeight/4;
+
     let topPipe = {
         img : pipeTopImg,
         x : pipeXPos,
-        y : pipeYPos,
+        y : randomPipesY,
         width : pipeWidth,
         height : pipeHeight,
         passed : false
     }
 
-    pipeArray.push(topPipe);
+
+    pipesArray.push(topPipe);
+
+    let bottomPipe = {
+        img : pipeBottomImg,
+        x : pipeXPos,
+        y : randomPipesY + pipeHeight + opening,
+        width : pipeWidth,
+        height : pipeHeight,
+        passed : false
+    }
+    pipesArray.push(bottomPipe);
+}
+
+function birdJump(event){
+    if (event.code === 'Space' || event.code === 'ArrowUp' || event.code === 'KeyX'){
+        velocityY = -6;
+    }
 }
 
