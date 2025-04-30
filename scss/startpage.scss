@@ -1,0 +1,29 @@
+body{
+    margin: 0;
+    background-color: skyblue;
+}
+
+header{
+    background-color: green;
+    
+}
+
+main{
+    display: flex;
+    flex-direction: row;
+    justify-content: baseline;
+}
+
+section {
+    background-color: bisque;
+
+    width: 10rem;
+    height: 10rem;
+    padding: 1rem;
+
+    text-align: center;
+}
+
+footer{
+    background-color: green;
+}

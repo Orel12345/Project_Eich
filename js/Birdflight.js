@@ -33,7 +33,7 @@ let velocityX = -2; // så att rören rör sig åt vänster. hastigheten.
 
 //fågeln hopp
 let velocityY = 0;
-let gravity = 0.4;
+let gravity = 0.5;
 
 window.onload = function(){
     gameBoard = document.getElementById('game-board');
@@ -56,6 +56,12 @@ window.onload = function(){
     
     pipeBottomImg = new Image();
     pipeBottomImg.src = './media/bottompipe.png';
+
+    // let topPipes = ctx.fillStyle = 'green';
+    // ctx.fillrect(pipe.x, pipe.y, pipeWidth, pipeHeight);
+
+    // let bottomPipes = ctx.fillStyle = 'green';
+    // ctx.fillrect(pipe.x, pipe.y, pipeWidth, pipeHeight);
     
 
     requestAnimationFrame(updateGame);
@@ -70,6 +76,8 @@ function updateGame (){
 
     velocityY += gravity;
     birdie.y += velocityY;
+    
+
     ctx.drawImage(birdieImage, birdie.x, birdie.y, birdie.width, birdie.height);
 
     for (let i = 0; i < pipesArray.length; i++){
@@ -112,5 +120,10 @@ function birdJump(event){
     if (event.code === 'Space' || event.code === 'ArrowUp' || event.code === 'KeyX'){
         velocityY = -6;
     }
+
+  
 }
 
+function birdDie(a, b){
+    return a.
+}
