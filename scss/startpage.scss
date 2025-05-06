@@ -1,29 +1,19 @@
-body{
-    margin: 0;
-    background-color: skyblue;
-}
-
-header{
-    background-color: green;
-    
-}
-
 main{
     display: flex;
-    flex-direction: row;
-    justify-content: baseline;
+    justify-content: center;
 }
 
-section {
+#start-game {
     background-color: bisque;
 
     width: 10rem;
     height: 10rem;
     padding: 1rem;
 
+    border-radius: var(--radius);
+
     text-align: center;
+    
+
 }
 
-footer{
-    background-color: green;
-}

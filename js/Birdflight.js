@@ -3,6 +3,11 @@ let gameBoard;
 let gameBoardWidth = 360;
 let gameBoardHeight = 640;
 let ctx;
+let score;
+
+//fågeln hopp
+let velocityY = 0;
+let gravity = 0.5;
 
 //bird
 let birdWidth = 34;
@@ -16,24 +21,6 @@ let birdie = {
     width : birdWidth,
     height : birdHeight
 }
-
-//rören
-
-let pipesArray = [];
-let pipeWidth = 64;
-let pipeHeight = 512;
-let pipeXPos = gameBoardWidth;
-let pipeYPos = 0;
-
-let pipeTopImg;
-let pipeBottomImg;
-
-//rörens rörelse
-let velocityX = -2; // så att rören rör sig åt vänster. hastigheten.
-
-//fågeln hopp
-let velocityY = 0;
-let gravity = 0.5;
 
 window.onload = function(){
     gameBoard = document.getElementById('game-board');
@@ -74,6 +61,11 @@ function updateGame (){
     requestAnimationFrame(updateGame);
     ctx.clearRect(0,0, gameBoardWidth, gameBoardHeight);
 
+
+    ctx.fillstyle = 'white';
+    ctx.font = '30px Jersey 10'
+    ctx.fillText(score, 0,0);
+
     velocityY += gravity;
     birdie.y += velocityY;
     
@@ -84,9 +76,28 @@ function updateGame (){
         let pipe = pipesArray[i];
         pipe.x += velocityX * 1.5;
         ctx.drawImage(pipe.img, pipe.x, pipe.y, pipe.width, pipe.height);
+
+        if (pipe.passed && birdie.x > ){
+
+        }
     }
 
+    
 }
+
+//rören
+
+let pipesArray = [];
+let pipeWidth = 64;
+let pipeHeight = 512;
+let pipeXPos = gameBoardWidth;
+let pipeYPos = 0;
+
+let pipeTopImg;
+let pipeBottomImg;
+
+//rörens rörelse
+let velocityX = -2; // så att rören rör sig åt vänster. hastigheten.
 
 function placePipes (){
     // längden på översta rören växlar mellan -1/4 av längden och -3/4 av länden
@@ -117,13 +128,14 @@ function placePipes (){
 }
 
 function birdJump(event){
-    if (event.code === 'Space' || event.code === 'ArrowUp' || event.code === 'KeyX'){
+    if (event.code === 'Space'){
         velocityY = -6;
     }
-
   
 }
 
-function birdDie(a, b){
-    return a.
-}
+
+
+// function birdDie(a, b){
+//     return a.
+// }
