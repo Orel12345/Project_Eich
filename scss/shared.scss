@@ -22,9 +22,10 @@ body{
 }
 
 :root{
-    --color-bg: green;
+    --color-bg: limegreen;
     --color-fg: white;
     --color-heading1: red;
+    --color-outline: black;
 
     --radius: 0.5rem;
 }
@@ -40,8 +41,3 @@ header{
     font-size: 1.5rem;
 }
 
-footer{
-    margin: 0;
-    background-color: var(--color-bg);
-    
-}

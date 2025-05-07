@@ -3,7 +3,13 @@ body {
     text-align: center;
 }
 
+main p{
+    font-size: 1.5rem;
+}
+
 #game-board{
     background-image: url("/media/BirdFlightBackground.png");
     // background-color: skyblue;
+    outline: dashed;
 }
+

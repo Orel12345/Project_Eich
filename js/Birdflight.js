@@ -3,7 +3,9 @@ let gameBoard;
 let gameBoardWidth = 360;
 let gameBoardHeight = 640;
 let ctx;
-let score;
+let score = 0;
+
+let gameOver = false;
 
 //fågeln hopp
 let velocityY = 0;
@@ -61,10 +63,10 @@ function updateGame (){
     requestAnimationFrame(updateGame);
     ctx.clearRect(0,0, gameBoardWidth, gameBoardHeight);
 
-
-    ctx.fillstyle = 'white';
-    ctx.font = '30px Jersey 10'
+    ctx.fillstyle = 'black';
+     ctx.font = '30px serif'
     ctx.fillText(score, 0,0);
+
 
     velocityY += gravity;
     birdie.y += velocityY;
@@ -77,12 +79,19 @@ function updateGame (){
         pipe.x += velocityX * 1.5;
         ctx.drawImage(pipe.img, pipe.x, pipe.y, pipe.width, pipe.height);
 
-        if (pipe.passed && birdie.x > ){
+        if (birdDie(birdie, pipe)){
+            gameOver = true;
+        }
 
+        if (!pipe.passed && birdie.x > pipe.x + pipe.width){
+            score += 1;
+            pipe.passed = true;
         }
     }
 
-    
+    if (gameOver) {
+        return;
+    }
 }
 
 //rören
@@ -100,9 +109,10 @@ let pipeBottomImg;
 let velocityX = -2; // så att rören rör sig åt vänster. hastigheten.
 
 function placePipes (){
+
     // längden på översta rören växlar mellan -1/4 av längden och -3/4 av länden
     let randomPipesY = pipeYPos - pipeHeight/4 - Math.random()*(pipeHeight/2);
-    let opening = gameBoardHeight/4;
+    let opening = gameBoardHeight/5;
 
     let topPipe = {
         img : pipeTopImg,
@@ -125,6 +135,10 @@ function placePipes (){
         passed : false
     }
     pipesArray.push(bottomPipe);
+
+    if (gameOver) {
+        return;
+    }
 }
 
 function birdJump(event){
@@ -134,8 +148,9 @@ function birdJump(event){
   
 }
 
-
-
-// function birdDie(a, b){
-//     return a.
-// }
+function birdDie(a, b){
+    return a.x < b.x + b.width && 
+            a.x + a.width > b.x &&
+            a.y < b.y + b.height &&
+            a.y + a.height > b.y;
+}
