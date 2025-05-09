@@ -3,7 +3,7 @@ let gameBoard;
 let gameBoardWidth = 360;
 let gameBoardHeight = 640;
 let ctx;
-let score = 0;
+let score;
 
 let gameOver = false;
 

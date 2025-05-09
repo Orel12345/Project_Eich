@@ -7,5 +7,5 @@ function handleGameStart(event) {
 
 
     window.location.href = 'index.html';
-
+ 
 }

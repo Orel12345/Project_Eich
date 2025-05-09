@@ -9,5 +9,5 @@ main p {
 
 #game-board {
   background-image: url("/media/BirdFlightBackground.png");
-  outline: dashed;
+  outline-style: groove;
 }/*# sourceMappingURL=style.css.map */
