@@ -3,7 +3,7 @@ let gameBoard;
 let gameBoardWidth = 360;
 let gameBoardHeight = 640;
 let ctx;
-let score;
+let score = 0;
 
 let gameOver = false;
 
@@ -61,37 +61,43 @@ window.onload = function(){
 
 function updateGame (){
     requestAnimationFrame(updateGame);
-    ctx.clearRect(0,0, gameBoardWidth, gameBoardHeight);
+    if (gameOver) {
+        return  window.location.href = 'endpage.html';
+    }
 
-    ctx.fillstyle = 'black';
-     ctx.font = '30px serif'
-    ctx.fillText(score, 0,0);
+    ctx.clearRect(0,0, gameBoardWidth, gameBoardHeight);
 
 
     velocityY += gravity;
-    birdie.y += velocityY;
+    birdie.y = Math.max(birdie.y + velocityY,0);
     
+    if (birdie.y > gameBoardHeight) {
+        gameOver = true;
+    }
 
     ctx.drawImage(birdieImage, birdie.x, birdie.y, birdie.width, birdie.height);
 
     for (let i = 0; i < pipesArray.length; i++){
         let pipe = pipesArray[i];
-        pipe.x += velocityX * 1.5;
+        pipe.x += velocityX * 1.8;
         ctx.drawImage(pipe.img, pipe.x, pipe.y, pipe.width, pipe.height);
 
         if (birdDie(birdie, pipe)){
             gameOver = true;
         }
 
+        
+
         if (!pipe.passed && birdie.x > pipe.x + pipe.width){
-            score += 1;
+            score += 0.5;
             pipe.passed = true;
         }
     }
 
-    if (gameOver) {
-        return;
-    }
+    ctx.fillstyle = 'black';
+    ctx.font = '30px Jersey-10'
+    ctx.fillText(score, 5, 45);
+
 }
 
 //rören
@@ -109,6 +115,10 @@ let pipeBottomImg;
 let velocityX = -2; // så att rören rör sig åt vänster. hastigheten.
 
 function placePipes (){
+
+    if (gameOver) {
+        return  window.location.href = 'endpage.html';
+    }
 
     // längden på översta rören växlar mellan -1/4 av längden och -3/4 av länden
     let randomPipesY = pipeYPos - pipeHeight/4 - Math.random()*(pipeHeight/2);
@@ -136,9 +146,6 @@ function placePipes (){
     }
     pipesArray.push(bottomPipe);
 
-    if (gameOver) {
-        return;
-    }
 }
 
 function birdJump(event){

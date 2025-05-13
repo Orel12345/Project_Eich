@@ -3,13 +3,36 @@ body {
     text-align: center;
 }
 
-main p{
+section{
     font-size: 1.5rem;
 }
 
-#game-board{
-    background-image: url("/media/BirdFlightBackground.png");
-    // background-color: skyblue;
-    outline-style: groove;
+#computer{
+    display: none;
 }
+
+@media screen and (min-width: 1200px){
+    section {
+        display: none;
+    }
+
+    #computer{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+
+    }
+    
+    #computer p{
+        font-size: 1.5rem;
+    }
+    
+    #game-board{
+        background-image: url("/media/BirdFlightBackground.png");
+        // background-color: skyblue;
+        outline-style: groove;
+    }
+
+    
+}
+
 
