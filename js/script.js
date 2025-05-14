@@ -96,7 +96,7 @@ function updateGame (){
 
     ctx.fillstyle = 'black';
     ctx.font = '30px Jersey-10'
-    ctx.fillText(score, 5, 45);
+    ctx.fillText(score, 5, 50);
 
 }
 
